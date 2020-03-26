@@ -58,6 +58,30 @@ class EmployeeController extends AbstractController
         return $response;
 
     }
+    /**
+    * @Route("/employees", name="employees_add", methods={"POST"})
+    */
+    public function create(Request $request) {
+
+        $employee = new Employee;
+
+        $employee->setFirstname($request->request->get('firstname'));
+        $employee->setLastname( $request->request->get('lastname') );
+
+        $date = new \DateTime($request->request->get('employement_date'));
+        $employee->setEmployementDate($date);
+        
+        $job = $this->getDoctrine()->getRepository(Job::class)->find( $request->request->get('job_id') );
+        $employee->setJob($job);
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($employee);
+        $manager->flush();
+
+        return new Response(null, 201);
+    }
+
 
 
     /**
@@ -90,7 +114,7 @@ class EmployeeController extends AbstractController
     }
 
     /**
-     * @Route("/employee/{id}", name="job_delete", methods={"DELETE"},requirements={"id":"\d+"})
+     * @Route("/employee/{id}", name="job_delete", methods={"DELETE"}, requirements={"id":"\d+"})
      */
     public function delete(Request $request, Employee $employee)
     {

@@ -15,7 +15,7 @@ class JobFixtures extends Fixture
             array('title' => 'Mécanicien'),
             array('title' => 'Opticien'),
             array('title' => 'Producteur'),
-            array('title' => 'Devellopeur'),
+            array('title' => 'Developpeur'),
         );
     
         foreach($tab as $row)

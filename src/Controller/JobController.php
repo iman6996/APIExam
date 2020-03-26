@@ -74,6 +74,7 @@ class JobController extends AbstractController
         $manager->persist($job);
         $manager->flush();
 
+
         return new Response(null, 201);
     }
 
